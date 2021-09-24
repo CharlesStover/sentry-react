@@ -1,22 +1,33 @@
-# Node package
+# <Sentry />
 
-[![version](https://img.shields.io/npm/v/PACKAGE-NAME.svg)](https://www.npmjs.com/package/PACKAGE-NAME)
-[![minzipped size](https://img.shields.io/bundlephobia/minzip/PACKAGE-NAME.svg)](https://www.npmjs.com/package/PACKAGE-NAME)
-[![downloads](https://img.shields.io/npm/dt/PACKAGE-NAME.svg)](https://www.npmjs.com/package/PACKAGE-NAME)
+[![version](https://img.shields.io/npm/v/sentry-react.svg)](https://www.npmjs.com/package/sentry-react)
+[![minzipped size](https://img.shields.io/bundlephobia/minzip/sentry-react.svg)](https://www.npmjs.com/package/sentry-react)
+[![downloads](https://img.shields.io/npm/dt/sentry-react.svg)](https://www.npmjs.com/package/sentry-react)
 
-Description
+`sentry-react` offers a `<Sentry />` component that instantiates Sentry for your
+React application.
 
 ## Install
 
-- `npm install package-name` or
-- `yarn add package-name`
+- `npm install sentry-react` or
+- `yarn add sentry-react`
 
 ## Use
 
-```javascript
-import packageName from 'package-name';
+Mount `<Sentry />` around your React application, typically alongside your
+context providers.
 
-packageName();
+```javascript
+import { render } from 'react-dom';
+import Sentry from 'sentry-react';
+import App from './components';
+
+render(
+  <Sentry>
+    <App />
+  </Sentry>,
+  document.getElementById('root'),
+);
 ```
 
 ## API
@@ -27,5 +38,5 @@ API
 
 - `yarn set version latest`
 - `yarn up * @*/*`
-- If you use VIM, run `yarn dlx @yarnpkg/sdks vim`.
-- If you use Visual Studio Code, run `yarn dlx @yarnpkg/sdks vscode`.
+- If you use VIM, run `yarn sdks vim`.
+- If you use Visual Studio Code, run `yarn sdks vscode`.
