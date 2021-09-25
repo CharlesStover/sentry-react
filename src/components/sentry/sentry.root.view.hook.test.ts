@@ -4,9 +4,13 @@ jest.mock('@sentry/react', () => ({
 }));
 
 import { renderHook } from '@testing-library/react-hooks';
-import { Integration, LogLevel } from '@sentry/types';
+import type { Integration } from '@sentry/types';
+import { LogLevel } from '@sentry/types';
 import useSentry from './sentry.root.view.hook';
 
+const FIRST_ARGUMENT = 0;
+const FIRST_CALL = 0;
+const ONCE = 1;
 const TEST_BEFORE_BREADCRUMB = jest.fn();
 const TEST_BEFORE_SEND = jest.fn();
 const TEST_TRACES_SAMPLER = jest.fn();
@@ -50,7 +54,7 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_INIT).toHaveBeenCalledTimes(1);
+    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
     expect(TEST_INIT).toHaveBeenLastCalledWith({
       _experiments: {},
       _metadata: {},
@@ -94,7 +98,7 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_INIT).toHaveBeenCalledTimes(1);
+    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
     expect(TEST_INIT).toHaveBeenLastCalledWith({
       defaultIntegrations: [],
       dsn: 'test-dsn',
@@ -105,7 +109,7 @@ describe('useSentry', (): void => {
     const TEST_INTEGRATIONS: readonly Integration[] = [
       {
         name: 'test-integration',
-        setupOnce(): void {},
+        setupOnce: jest.fn(),
       },
     ];
 
@@ -118,8 +122,10 @@ describe('useSentry', (): void => {
       },
     });
 
-    expect(TEST_INIT.mock.calls[0][0].integrations()).toEqual(
-      TEST_INTEGRATIONS,
-    );
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    const integrationsFunction: () => readonly Integration[] =
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      TEST_INIT.mock.calls[FIRST_CALL][FIRST_ARGUMENT].integrations;
+    expect(integrationsFunction()).toEqual(TEST_INTEGRATIONS);
   });
 });

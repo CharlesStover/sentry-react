@@ -20,7 +20,7 @@ import type {
 } from '@sentry/types';
 import type { ReactElement, ReactNode } from 'react';
 import DefaultErrorBoundaryFallback from '../../components/default-error-boundary-fallback';
-import FallbackRenderParams from '../../types/fallback-render-params';
+import type FallbackRenderParams from '../../types/fallback-render-params';
 import useSentry from './sentry.root.view.hook';
 
 interface Props {
@@ -29,7 +29,7 @@ interface Props {
   readonly autoSessionTracking?: boolean | undefined;
   readonly children: ReactNode;
   readonly debug?: boolean | undefined;
-  readonly defaultIntegrations?: false | readonly Integration[];
+  readonly defaultIntegrations?: readonly Integration[] | false;
   readonly denyUrls?: (RegExp | string)[] | undefined;
   readonly dist?: string | undefined;
   readonly dsn?: string | undefined;
@@ -56,30 +56,30 @@ interface Props {
     | ((props: FallbackRenderParams) => ReactElement)
     | undefined;
   readonly integrations?:
-    | undefined
     | readonly Integration[]
     | ((
         integrations: readonly Readonly<Integration>[],
-      ) => readonly Integration[]);
+      ) => readonly Integration[])
+    | undefined;
   readonly beforeBreadcrumb?:
-    | undefined
     | ((
         breadcrumb: Readonly<Breadcrumb>,
         hint?: BreadcrumbHint,
-      ) => Breadcrumb | null);
+      ) => Breadcrumb | null)
+    | undefined;
   readonly beforeSend?:
-    | undefined
     | ((
         event: Readonly<Event>,
         hint?: EventHint,
-      ) => PromiseLike<Event | null> | Event | null);
+      ) => Event | PromiseLike<Event | null> | null)
+    | undefined;
   readonly tracesSampler?:
-    | undefined
     | ((
         samplingContext: Readonly<
           Omit<SamplingContext, 'transactionContext'>
         > & { readonly transactionContext: Readonly<TransactionContext> },
-      ) => number | boolean);
+      ) => boolean | number)
+    | undefined;
 }
 
 export default function Sentry({

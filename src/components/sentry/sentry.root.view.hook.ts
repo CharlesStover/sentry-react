@@ -24,7 +24,7 @@ interface Props {
   readonly attachStacktrace?: boolean | undefined;
   readonly autoSessionTracking?: boolean | undefined;
   readonly debug?: boolean | undefined;
-  readonly defaultIntegrations?: false | undefined | readonly Integration[];
+  readonly defaultIntegrations?: readonly Integration[] | false | undefined;
   readonly denyUrls?: readonly (RegExp | string)[] | undefined;
   readonly dist?: string | undefined;
   readonly dsn?: string | undefined;
@@ -46,30 +46,30 @@ interface Props {
   readonly transportOptions?: TransportOptions | undefined;
   readonly tunnel?: string | undefined;
   readonly integrations?:
-    | undefined
     | readonly Integration[]
     | ((
         integrations: readonly Readonly<Integration>[],
-      ) => readonly Integration[]);
+      ) => readonly Integration[])
+    | undefined;
   readonly beforeBreadcrumb?:
-    | undefined
     | ((
         breadcrumb: Readonly<Breadcrumb>,
         hint?: BreadcrumbHint,
-      ) => Breadcrumb | null);
+      ) => Breadcrumb | null)
+    | undefined;
   readonly beforeSend?:
-    | undefined
     | ((
         event: Readonly<Event>,
         hint?: EventHint,
-      ) => PromiseLike<Event | null> | Event | null);
+      ) => Event | PromiseLike<Event | null> | null)
+    | undefined;
   readonly tracesSampler?:
-    | undefined
     | ((
         samplingContext: Readonly<
           Omit<SamplingContext, 'transactionContext'>
         > & { readonly transactionContext: Readonly<TransactionContext> },
-      ) => number | boolean);
+      ) => boolean | number)
+    | undefined;
 }
 
 export default function useSentry({

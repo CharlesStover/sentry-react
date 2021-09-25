@@ -1,6 +1,6 @@
 {
   "name": "sentry-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Charles Stover <sentry-react@charlesstover.com>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",
@@ -16,10 +16,6 @@
   },
   "directories": {
     "lib": "src"
-  },
-  "exports": {
-    "import": "./dist/esm/index.js",
-    "require": "./dist/cjs/index.cjs"
   },
   "files": [
     "dist",

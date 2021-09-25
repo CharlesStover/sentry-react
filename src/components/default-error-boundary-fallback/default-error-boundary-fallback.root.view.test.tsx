@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react';
 import DefaultErrorBoundaryFallback from '.';
 
+const ONCE = 1;
+
 describe('DefaultErrorBoundaryFallback', (): void => {
   it('should render the error message', (): void => {
     const { getByText } = render(
@@ -26,6 +28,6 @@ describe('DefaultErrorBoundaryFallback', (): void => {
     );
     expect(TEST_RESET_ERROR).not.toHaveBeenCalled();
     getByText('Retry').click();
-    expect(TEST_RESET_ERROR).toHaveBeenCalledTimes(1);
+    expect(TEST_RESET_ERROR).toHaveBeenCalledTimes(ONCE);
   });
 });

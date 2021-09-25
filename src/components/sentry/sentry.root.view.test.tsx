@@ -6,10 +6,7 @@ import Sentry from '../..';
 describe('Sentry', (): void => {
   it('should render children', (): void => {
     const { getByText } = render(
-      <Sentry
-        errorBoundaryDialogOptions={Object.create(null)}
-        showErrorBoundaryDialog
-      >
+      <Sentry errorBoundaryDialogOptions={{}} showErrorBoundaryDialog>
         Hello world
       </Sentry>,
     );
@@ -20,7 +17,7 @@ describe('Sentry', (): void => {
     // Disable console.error, because the thrown error is expected to be logged.
     const consoleError = console.error;
     beforeEach((): void => {
-      console.error = (): void => {};
+      console.error = jest.fn();
     });
 
     afterEach((): void => {
