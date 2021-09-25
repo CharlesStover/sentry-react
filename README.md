@@ -32,7 +32,28 @@ render(
 
 ## API
 
-API
+The `Sentry` component shares all the same properties as Sentry's `init`
+function. Additionally, you can use the following:
+
+### `ErrorBoundaryFallback`
+
+Type: `FunctionComponent<FallbackRenderParams>` _optional_
+
+### `errorBoundaryDialogOptions`
+
+Type: `ReportDialogOptions` _optional_
+
+### `showErrorBoundaryDialog`
+
+Type: `boolean` _optional_
+
+## Integrations
+
+### FullStory
+
+To integrate Sentry with FullStory, go to the Sentry website, under organization
+settings, Security & Privacy, Data Scrubbing, and add `fullStoryUrl` to "Global
+Safe Fields."
 
 ## Contributing
 

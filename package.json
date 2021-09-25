@@ -38,9 +38,13 @@
     "build": "rollup --config",
     "eslint": "eslint src",
     "jest": "jest",
+    "jest-watch": "jest --coverage=false --watch",
     "start": "rollup --config --watch",
-    "test": "eslint src && jest",
-    "test-watch": "jest --coverage=false --watch"
+    "test": "eslint src && jest"
+  },
+  "dependencies": {
+    "@sentry/react": "^6.13.2",
+    "@sentry/types": "^6.13.2"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^20.0.0",
@@ -53,7 +57,7 @@
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
-    "@yarnpkg/sdks": "2.4.1-rc.1",
+    "@yarnpkg/sdks": "^2.4.2-rc.6",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
