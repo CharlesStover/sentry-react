@@ -1,4 +1,4 @@
-name: Pull request
+name: Push
 jobs:
   install:
     runs-on: ubuntu-latest
@@ -100,5 +100,5 @@ jobs:
           NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
 
 on:
-  pull_request:
+  push:
     branches: [main]
