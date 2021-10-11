@@ -7,7 +7,6 @@
   "license": "MIT",
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
-  "repository": "github:CharlesStover/sentry-react",
   "type": "module",
   "types": "./types/index.d.ts",
   "bugs": {
@@ -36,6 +35,10 @@
     "jest-watch": "jest --coverage=false --watch",
     "rollup": "rollup --config",
     "rollup-watch": "rollup --config --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CharlesStover/sentry-react.git"
   },
   "dependencies": {
     "@sentry/react": "^6.13.2",
