@@ -20,7 +20,7 @@ context providers.
 ```javascript
 import { render } from 'react-dom';
 import Sentry from 'sentry-react';
-import App from './components';
+import { App } from './components';
 
 render(
   <Sentry>
