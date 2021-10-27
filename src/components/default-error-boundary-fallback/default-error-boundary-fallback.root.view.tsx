@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { CSSProperties, ReactElement } from 'react';
 
 interface Props {
   readonly componentStack: string | null;
@@ -7,14 +7,22 @@ interface Props {
   readonly resetError: () => void;
 }
 
+const STYLE: CSSProperties = {
+  display: 'flex',
+  flexDirection: 'row',
+};
+
 export default function DefaultErrorBoundaryFallback({
   error,
   resetError,
 }: Props): ReactElement {
   return (
-    <>
-      <strong>An error occurred while rendering the application:</strong>
-      <span>{error.message}</span> <button onClick={resetError}>Retry</button>
-    </>
+    <div style={STYLE}>
+      <div>
+        <strong>An error occurred while rendering the application:</strong>
+        <p>{error.message}</p>
+      </div>
+      <button onClick={resetError}>Retry</button>
+    </div>
   );
 }

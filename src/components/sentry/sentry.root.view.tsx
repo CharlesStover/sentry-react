@@ -6,12 +6,12 @@ import type {
   ReportDialogOptions,
 } from '@sentry/react';
 import { ErrorBoundary } from '@sentry/react';
-import type { ErrorBoundaryProps } from '@sentry/react/dist/errorboundary';
 import type {
   CaptureContext,
   Integration,
   LogLevel,
   SamplingContext,
+  Scope,
   SdkMetadata,
   TransactionContext,
   Transport,
@@ -44,6 +44,7 @@ interface Props {
   readonly maxValueLength?: number | undefined;
   readonly metadata?: SdkMetadata | undefined;
   readonly normalizeDepth?: number | undefined;
+  readonly onErrorBoundaryMount?: VoidFunction | undefined;
   readonly release?: string | undefined;
   readonly sampleRate?: number | undefined;
   readonly showErrorBoundaryDialog?: boolean | undefined;
@@ -52,6 +53,13 @@ interface Props {
   readonly transport?: TransportClass<Transport> | undefined;
   readonly transportOptions?: TransportOptions | undefined;
   readonly tunnel?: string | undefined;
+  readonly beforeErrorBoundaryCapture?:
+    | ((
+        scope: Readonly<Scope>,
+        error: Readonly<Error> | null,
+        componentStack: string | null,
+      ) => void)
+    | undefined;
   readonly ErrorBoundaryFallback?:
     | ((props: FallbackRenderParams) => ReactElement)
     | undefined;
@@ -73,6 +81,27 @@ interface Props {
         hint?: EventHint,
       ) => Event | PromiseLike<Event | null> | null)
     | undefined;
+  readonly onErrorBoundaryError?:
+    | ((
+        error: Readonly<Error>,
+        componentStack: string,
+        eventId: string,
+      ) => void)
+    | undefined;
+  readonly onErrorBoundaryReset?:
+    | ((
+        error: Error | null,
+        componentStack: string | null,
+        eventId: string | null,
+      ) => void)
+    | undefined;
+  readonly onErrorBoundaryUnmount?:
+    | ((
+        error: Error | null,
+        componentStack: string | null,
+        eventId: string | null,
+      ) => void)
+    | undefined;
   readonly tracesSampler?:
     | ((
         samplingContext: Readonly<
@@ -84,6 +113,7 @@ interface Props {
 
 export default function Sentry({
   ErrorBoundaryFallback = DefaultErrorBoundaryFallback,
+  beforeErrorBoundaryCapture,
   children,
   environment,
   allowUrls,
@@ -107,6 +137,10 @@ export default function Sentry({
   maxValueLength,
   metadata,
   normalizeDepth,
+  onErrorBoundaryError,
+  onErrorBoundaryMount,
+  onErrorBoundaryReset,
+  onErrorBoundaryUnmount,
   release,
   sampleRate,
   showErrorBoundaryDialog,
@@ -149,17 +183,18 @@ export default function Sentry({
     tunnel,
   });
 
-  const errorBoundaryProps: ErrorBoundaryProps = {
-    fallback: ErrorBoundaryFallback,
-  };
-
-  if (typeof errorBoundaryDialogOptions !== 'undefined') {
-    errorBoundaryProps.dialogOptions = errorBoundaryDialogOptions;
-  }
-
-  if (typeof showErrorBoundaryDialog === 'boolean') {
-    errorBoundaryProps.showDialog = showErrorBoundaryDialog;
-  }
-
-  return <ErrorBoundary {...errorBoundaryProps}>{children}</ErrorBoundary>;
+  return (
+    <ErrorBoundary
+      beforeCapture={beforeErrorBoundaryCapture}
+      dialogOptions={errorBoundaryDialogOptions}
+      fallback={ErrorBoundaryFallback}
+      onError={onErrorBoundaryError}
+      onMount={onErrorBoundaryMount}
+      onReset={onErrorBoundaryReset}
+      onUnmount={onErrorBoundaryUnmount}
+      showDialog={showErrorBoundaryDialog}
+    >
+      {children}
+    </ErrorBoundary>
+  );
 }
