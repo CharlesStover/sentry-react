@@ -1,12 +1,15 @@
 const TEST_INIT = jest.fn();
+const TEST_SET_USER = jest.fn();
 jest.mock('@sentry/react', () => ({
   init: TEST_INIT,
+  setUser: TEST_SET_USER,
 }));
 
 import { renderHook } from '@testing-library/react-hooks';
-import type { Integration } from '@sentry/types';
+import type { Integration, User } from '@sentry/types';
 import { LogLevel } from '@sentry/types';
-import useSentry from './sentry.root.view.hook';
+import DEFAULT_USER from '../../constants/default-user';
+import useSentry from './sentry.root.hook';
 
 const FIRST_ARGUMENT = 0;
 const FIRST_CALL = 0;
@@ -127,5 +130,33 @@ describe('useSentry', (): void => {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
       TEST_INIT.mock.calls[FIRST_CALL][FIRST_ARGUMENT].integrations;
     expect(integrationsFunction()).toEqual(TEST_INTEGRATIONS);
+  });
+
+  it('should support a default user', (): void => {
+    renderHook(useSentry, {
+      initialProps: {
+        dsn: 'test-dsn',
+      },
+    });
+
+    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_SET_USER).toHaveBeenLastCalledWith(DEFAULT_USER);
+  });
+
+  it('should support an explicit user', (): void => {
+    const TEST_USER: User = {
+      ...DEFAULT_USER,
+      id: 'test-id',
+    };
+
+    renderHook(useSentry, {
+      initialProps: {
+        dsn: 'test-dsn',
+        user: TEST_USER,
+      },
+    });
+
+    expect(TEST_SET_USER).toHaveBeenCalledTimes(ONCE);
+    expect(TEST_SET_USER).toHaveBeenLastCalledWith(TEST_USER);
   });
 });

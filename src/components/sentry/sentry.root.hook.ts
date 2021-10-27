@@ -5,7 +5,7 @@ import type {
   Event,
   EventHint,
 } from '@sentry/react';
-import { init } from '@sentry/react';
+import { init, setUser } from '@sentry/react';
 import type {
   CaptureContext,
   Integration,
@@ -16,8 +16,10 @@ import type {
   Transport,
   TransportClass,
   TransportOptions,
+  User,
 } from '@sentry/types';
 import { useEffect } from 'react';
+import DEFAULT_USER from '../../constants/default-user';
 
 interface Props {
   readonly allowUrls?: readonly (RegExp | string)[] | undefined;
@@ -45,6 +47,7 @@ interface Props {
   readonly transport?: TransportClass<Transport> | undefined;
   readonly transportOptions?: TransportOptions | undefined;
   readonly tunnel?: string | undefined;
+  readonly user?: User | undefined;
   readonly integrations?:
     | readonly Integration[]
     | ((
@@ -102,7 +105,8 @@ export default function useSentry({
   transport,
   transportOptions,
   tunnel,
-}: Props): void {
+  user,
+}: Readonly<Props>): void {
   useEffect((): void => {
     const options: BrowserOptions = {};
 
@@ -240,4 +244,11 @@ export default function useSentry({
     transportOptions,
     tunnel,
   ]);
+
+  useEffect((): void => {
+    setUser({
+      ...DEFAULT_USER,
+      ...user,
+    });
+  }, [user]);
 }

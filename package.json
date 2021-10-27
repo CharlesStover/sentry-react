@@ -1,6 +1,6 @@
 {
   "name": "sentry-react",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Charles Stover <sentry-react@charlesstover.com>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",

@@ -45,11 +45,10 @@ In addition to the default `<Sentry />` component export, you can also import:
 - The `withProfiler` higher-order component will wrap your component in the
   aforementioned `Profiler` component.
 
-## API
+## Props
 
 The `Sentry` component shares all the same properties as Sentry's `init`
-function. Additionally, you can use the following props to customize the error
-boundary:
+function. Additionally, you can use the following props:
 
 ### `ErrorBoundaryFallback`
 
@@ -113,6 +112,14 @@ Type: `boolean` _optional_
 
 The `showErrorBoundaryDialog` prop determines if a Sentry report dialog should
 be rendered on error.
+
+### `user`
+
+Type: `User` _optional_
+
+By default, the user will have their IP address automatically assigned by
+Sentry. While you can associate any key-value pairs to the `user` prop, Sentry
+recommends `id`, `email`, `ip_address`, and `username`.
 
 ## Integrations
 
