@@ -7,6 +7,7 @@
   "license": "MIT",
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
+  "packageManager": "yarn@3.1.1",
   "type": "module",
   "types": "./types/index.d.ts",
   "bugs": {
@@ -31,10 +32,11 @@
   },
   "scripts": {
     "eslint": "eslint src",
+    "eslint:fix": "eslint src --fix",
     "jest": "jest",
-    "jest-watch": "jest --coverage=false --watch",
+    "jest:watch": "jest --coverage=false --watch",
     "rollup": "rollup --config",
-    "rollup-watch": "rollup --config --watch"
+    "rollup:watch": "rollup --config --watch"
   },
   "repository": {
     "type": "git",
@@ -75,6 +77,5 @@
   "peerDependencies": {
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
-  },
-  "packageManager": "yarn@3.1.0"
+  }
 }

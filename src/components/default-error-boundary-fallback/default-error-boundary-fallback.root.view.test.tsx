@@ -7,9 +7,7 @@ describe('DefaultErrorBoundaryFallback', (): void => {
   it('should render the error message', (): void => {
     const { getByText } = render(
       <DefaultErrorBoundaryFallback
-        componentStack={null}
         error={new Error('test message')}
-        eventId={null}
         resetError={jest.fn()}
       />,
     );
@@ -20,9 +18,7 @@ describe('DefaultErrorBoundaryFallback', (): void => {
     const TEST_RESET_ERROR = jest.fn();
     const { getByText } = render(
       <DefaultErrorBoundaryFallback
-        componentStack={null}
         error={new Error('test message')}
-        eventId={null}
         resetError={TEST_RESET_ERROR}
       />,
     );

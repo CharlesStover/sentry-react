@@ -1,9 +1,7 @@
 import type { CSSProperties, ReactElement } from 'react';
 
 interface Props {
-  readonly componentStack: string | null;
   readonly error: Readonly<Error>;
-  readonly eventId: string | null;
   readonly resetError: () => void;
 }
 
@@ -22,7 +20,9 @@ export default function DefaultErrorBoundaryFallback({
         <strong>An error occurred while rendering the application:</strong>
         <p>{error.message}</p>
       </div>
-      <button onClick={resetError}>Retry</button>
+      <button onClick={resetError} type="button">
+        Retry
+      </button>
     </div>
   );
 }

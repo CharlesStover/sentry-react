@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import type { ReactElement } from 'react';
-import type { FallbackRenderParams } from '../..';
 import Sentry from '../..';
+import CustomErrorBoundaryFallback from '../../test/components/custom-error-boundary-fallback';
+import ThrowError from '../../test/components/throw-error';
 
 describe('Sentry', (): void => {
   it('should render children', (): void => {
@@ -25,16 +25,6 @@ describe('Sentry', (): void => {
     });
 
     it('should support a custom error boundary fallback', (): void => {
-      function CustomErrorBoundaryFallback({
-        error,
-      }: FallbackRenderParams): ReactElement {
-        return <>{error.message}</>;
-      }
-
-      function ThrowError(): ReactElement {
-        throw new Error('test error message');
-      }
-
       const { getByText } = render(
         <Sentry ErrorBoundaryFallback={CustomErrorBoundaryFallback}>
           <ThrowError />
