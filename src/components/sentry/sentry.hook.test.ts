@@ -53,8 +53,6 @@ describe('useSentry', (): void => {
 
     expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
     expect(TEST_INIT).toHaveBeenLastCalledWith({
-      _experiments: {},
-      _metadata: {},
       allowUrls: [],
       attachStacktrace: true,
       autoSessionTracking: true,

@@ -63,8 +63,8 @@
     "eslint-plugin-react-hooks": "^4.4.0",
     "jest": "^27.5.1",
     "prettier": "^2.6.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-test-renderer": "^18.0.0",
     "rollup": "^2.70.1",
     "rollup-plugin-typescript2": "^0.31.2",
@@ -75,7 +75,7 @@
   "peerDependencies": {
     "@sentry/react": "^6.19.2",
     "@sentry/types": "^6.19.2",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0"
   }
 }
