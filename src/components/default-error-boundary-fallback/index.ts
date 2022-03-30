@@ -1,1 +1,1 @@
-export { default } from './default-error-boundary-fallback.root.view';
+export { default } from './default-error-boundary-fallback.view';

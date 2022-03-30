@@ -6,13 +6,10 @@ jest.mock('@sentry/react', () => ({
 }));
 
 import { renderHook } from '@testing-library/react-hooks';
-import type { Integration, User } from '@sentry/types';
-import { LogLevel } from '@sentry/types';
+import type { User } from '@sentry/types';
 import DEFAULT_USER from '../../constants/default-user';
-import useSentry from './sentry.root.hook';
+import useSentry from './sentry.hook';
 
-const FIRST_ARGUMENT = 0;
-const FIRST_CALL = 0;
 const ONCE = 1;
 const TEST_BEFORE_BREADCRUMB = jest.fn();
 const TEST_BEFORE_SEND = jest.fn();
@@ -35,14 +32,11 @@ describe('useSentry', (): void => {
         dsn: 'test-dsn',
         enabled: true,
         environment: 'test-environment',
-        experiments: {},
         ignoreErrors: [],
         initialScope: {},
         integrations: [],
-        logLevel: LogLevel.None,
         maxBreadcrumbs: 1,
         maxValueLength: 1,
-        metadata: {},
         normalizeDepth: 1,
         release: 'test-release',
         sampleRate: 1,
@@ -76,7 +70,6 @@ describe('useSentry', (): void => {
       ignoreErrors: [],
       initialScope: {},
       integrations: [],
-      logLevel: LogLevel.None,
       maxBreadcrumbs: 1,
       maxValueLength: 1,
       normalizeDepth: 1,
@@ -91,45 +84,6 @@ describe('useSentry', (): void => {
         dsn: 'test-dsn',
       },
     });
-  });
-
-  it('should support a default integrations array', (): void => {
-    renderHook(useSentry, {
-      initialProps: {
-        defaultIntegrations: [],
-        dsn: 'test-dsn',
-      },
-    });
-
-    expect(TEST_INIT).toHaveBeenCalledTimes(ONCE);
-    expect(TEST_INIT).toHaveBeenLastCalledWith({
-      defaultIntegrations: [],
-      dsn: 'test-dsn',
-    });
-  });
-
-  it('should support an integrations function', (): void => {
-    const TEST_INTEGRATIONS: readonly Integration[] = [
-      {
-        name: 'test-integration',
-        setupOnce: jest.fn(),
-      },
-    ];
-
-    renderHook(useSentry, {
-      initialProps: {
-        dsn: 'test-dsn',
-        integrations(): readonly Integration[] {
-          return TEST_INTEGRATIONS;
-        },
-      },
-    });
-
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const integrationsFunction: () => readonly Integration[] =
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      TEST_INIT.mock.calls[FIRST_CALL][FIRST_ARGUMENT].integrations;
-    expect(integrationsFunction()).toEqual(TEST_INTEGRATIONS);
   });
 
   it('should support a default user', (): void => {
