@@ -1,1 +1,1 @@
-export { default } from './sentry.root.view';
+export { default } from './sentry.view';

@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import DefaultErrorBoundaryFallback from '.';
 
 const ONCE = 1;
@@ -23,7 +23,9 @@ describe('DefaultErrorBoundaryFallback', (): void => {
       />,
     );
     expect(TEST_RESET_ERROR).not.toHaveBeenCalled();
-    getByText('Retry').click();
+
+    fireEvent.click(getByText('Retry'));
+
     expect(TEST_RESET_ERROR).toHaveBeenCalledTimes(ONCE);
   });
 });

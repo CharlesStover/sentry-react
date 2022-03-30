@@ -1,12 +1,12 @@
 import type { BrowserOptions, ReportDialogOptions } from '@sentry/react';
 import { ErrorBoundary } from '@sentry/react';
-import type { Integration, Scope, User } from '@sentry/types';
+import type { Scope, User } from '@sentry/types';
 import type { ReactElement, ReactNode } from 'react';
 import DefaultErrorBoundaryFallback from '../../components/default-error-boundary-fallback';
 import type FallbackRenderParams from '../../types/fallback-render-params';
-import useSentry from './sentry.root.hook';
+import useSentry from './sentry.hook';
 
-interface Props extends Omit<BrowserOptions, 'integrations'> {
+interface Props extends BrowserOptions {
   readonly children: ReactNode;
   readonly errorBoundaryDialogOptions?: ReportDialogOptions | undefined;
   readonly onErrorBoundaryMount?: VoidFunction | undefined;
@@ -21,12 +21,6 @@ interface Props extends Omit<BrowserOptions, 'integrations'> {
         error: Readonly<Error> | null,
         componentStack: string | null,
       ) => void)
-    | undefined;
-  readonly integrations?:
-    | readonly Integration[]
-    | ((
-        integrations: readonly Readonly<Integration>[],
-      ) => readonly Integration[])
     | undefined;
   readonly onErrorBoundaryError?:
     | ((
