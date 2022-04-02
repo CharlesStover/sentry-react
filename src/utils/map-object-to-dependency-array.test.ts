@@ -1,30 +1,30 @@
 import mapObjectToDependencyArray from './map-object-to-dependency-array';
 
-const TEST_NUMBER_KEY = 123;
-const TEST_SYMBOL_KEY = Symbol('test-key');
-const TEST_SYMBOL_VALUE = Symbol('test-value');
+const TEST_NUMBER = 789;
+const TEST_NUMBER_PROPERTY_KEY = 123;
+const TEST_NUMBER_PROPERTY_VALUE = 456;
+const TEST_SYMBOL_PROPERTY_KEY = Symbol('test-key');
+const TEST_SYMBOL_PROPERTY_VALUE = Symbol('test-value');
 
 describe('mapObjectToDependencyArray', (): void => {
   it('should return sorted object keys and values', (): void => {
     expect(
       mapObjectToDependencyArray({
-        [TEST_SYMBOL_KEY]: TEST_SYMBOL_VALUE,
-        [TEST_NUMBER_KEY]: 456,
+        [TEST_NUMBER_PROPERTY_KEY]: TEST_NUMBER_PROPERTY_VALUE,
+        [TEST_SYMBOL_PROPERTY_KEY]: TEST_SYMBOL_PROPERTY_VALUE,
         bool: true,
-        num: 789,
+        num: TEST_NUMBER,
         str: 'test-string',
       }),
     ).toEqual([
-      TEST_NUMBER_KEY,
-      456,
+      '123',
+      TEST_NUMBER_PROPERTY_VALUE,
       'bool',
       true,
       'num',
-      789,
+      TEST_NUMBER,
       'str',
-      'test-striing',
-      TEST_SYMBOL_KEY,
-      TEST_SYMBOL_VALUE,
+      'test-string',
     ]);
   });
 });
