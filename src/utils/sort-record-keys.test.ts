@@ -6,9 +6,11 @@ const EQUAL = 0;
 
 describe('sortRecordKeys', (): void => {
   it('should sort numbers', (): void => {
-    expect(sortRecordKeys(1, 2)).toBe(BEFORE);
-    expect(sortRecordKeys(2, 1)).toBe(AFTER);
-    expect(sortRecordKeys(1, 1)).toBe(EQUAL);
+    const FIRST = 1;
+    const SECOND = 2;
+    expect(sortRecordKeys(FIRST, SECOND)).toBe(BEFORE);
+    expect(sortRecordKeys(SECOND, FIRST)).toBe(AFTER);
+    expect(sortRecordKeys(FIRST, FIRST)).toBe(EQUAL);
   });
 
   it('should sort strings', (): void => {
