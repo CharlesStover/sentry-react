@@ -1,6 +1,6 @@
 {
   "name": "sentry-react",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "author": "Charles Stover <sentry-react@charlesstover.com>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",
@@ -73,9 +73,9 @@
     "typescript": "^4.6.3"
   },
   "peerDependencies": {
-    "@sentry/react": "^6.19.2",
-    "@sentry/types": "^6.19.2",
-    "react": "^17.0.0 || ^18.0.0",
-    "react-dom": "^17.0.0 || ^18.0.0"
+    "@sentry/react": "^6.0.0",
+    "@sentry/types": "^6.0.0",
+    "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0"
   }
 }

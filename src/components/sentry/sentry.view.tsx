@@ -6,12 +6,15 @@ import DefaultErrorBoundaryFallback from '../../components/default-error-boundar
 import type FallbackRenderParams from '../../types/fallback-render-params';
 import useSentry from './sentry.hook';
 
-interface Props extends BrowserOptions {
+interface Props extends Readonly<BrowserOptions> {
   readonly children: ReactNode;
   readonly errorBoundaryDialogOptions?: ReportDialogOptions | undefined;
   readonly onErrorBoundaryMount?: VoidFunction | undefined;
   readonly showErrorBoundaryDialog?: boolean | undefined;
   readonly user?: User | undefined;
+
+  // `ErrorBoundaryFallback` is a React `FunctionComponent` without the `null`
+  //    return type.
   readonly ErrorBoundaryFallback?:
     | ((props: FallbackRenderParams) => ReactElement)
     | undefined;
