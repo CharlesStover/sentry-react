@@ -1,13 +1,13 @@
 {
   "name": "sentry-react",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "author": "Charles Stover <sentry-react@charlesstover.com>",
   "description": "A React component for instantiating Sentry",
   "homepage": "https://www.npmjs.com/package/sentry-react",
   "license": "MIT",
   "main": "./dist/cjs/index.cjs",
   "module": "./dist/esm/index.js",
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@3.2.1",
   "type": "module",
   "types": "./types/index.d.ts",
   "bugs": {
@@ -45,8 +45,8 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^21.0.3",
     "@rollup/plugin-node-resolve": "^13.1.3",
-    "@sentry/react": "^6.19.3",
-    "@sentry/types": "^6.19.3",
+    "@sentry/react": "^7.0.0",
+    "@sentry/types": "^7.0.0",
     "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.4.1",
@@ -73,8 +73,8 @@
     "typescript": "^4.6.3"
   },
   "peerDependencies": {
-    "@sentry/react": "^6.0.0",
-    "@sentry/types": "^6.0.0",
+    "@sentry/react": "^6.0.0 || ^7.0.0",
+    "@sentry/types": "^6.0.0 || ^7.0.0",
     "react": "^16.14.0 || ^17.0.0 || ^18.0.0",
     "react-dom": "^16.14.0 || ^17.0.0 || ^18.0.0"
   }
