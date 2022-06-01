@@ -45,9 +45,6 @@ describe('useSentry', (): void => {
         tracesSampler: TEST_TRACES_SAMPLER,
         transport: TEST_TRANSPORT,
         tunnel: 'test-tunnel',
-        transportOptions: {
-          dsn: 'test-dsn',
-        },
       },
     });
 
@@ -78,9 +75,6 @@ describe('useSentry', (): void => {
       tracesSampler: TEST_TRACES_SAMPLER,
       transport: TEST_TRANSPORT,
       tunnel: 'test-tunnel',
-      transportOptions: {
-        dsn: 'test-dsn',
-      },
     });
   });
 
